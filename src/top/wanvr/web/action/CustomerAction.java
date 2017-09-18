@@ -84,8 +84,8 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
     public String list() throws Exception {
         //封装离线查询对象
         DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
-        if(StringUtils.isNotBlank(customer.getCust_name())){
-            dc.add(Restrictions.like("cust_name","%"+customer.getCust_name()+"%"));
+        if (StringUtils.isNotBlank(customer.getCust_name())) {
+            dc.add(Restrictions.like("cust_name", "%" + customer.getCust_name() + "%"));
         }
 
         //调用Service查询分页数据（PageBean）
@@ -94,17 +94,30 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
         ActionContext.getContext().put("pageBean", pb);
         return "list";
     }
+
     //添加客户
-    public String add(){
+    public String add() throws Exception {
         //文件上传
-        photo.renameTo(new File(ServletActionContext.getRequest().getContextPath()+"/upload/"+photoFileName));
+        if(photo != null) {
+            photo.renameTo(new File(ServletActionContext.getRequest().getContextPath() + "/upload/" + photoFileName));
+        }
         //---------------------------------
         //调用service，保存Customer对象
-        cs.save(customer);
+        cs.saveOrUpdate(customer);
         //重定向到Action
         return "toList";
 
     }
+
+    //修改客户
+    public String toEdit() throws Exception {
+        //调用Service根据Id获得客户对象
+        Customer c = cs.getById(customer.getCust_id());
+        //将客户对象放置到request域，并转发到编辑页面
+        ActionContext.getContext().put("customer",c);
+        return "edit";
+    }
+
     @Override
     public Customer getModel() {
         return customer;

@@ -9,6 +9,8 @@ import java.util.List;
  * 通过BaseDao实现增删改查代码解耦
  * */
 public interface BaseDao<T> {
+    //增或修改
+    void saveOrUpdate(T t);
 
     //增
     void save(T t);

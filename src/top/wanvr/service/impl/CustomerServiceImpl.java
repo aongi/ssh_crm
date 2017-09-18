@@ -31,13 +31,19 @@ public class CustomerServiceImpl implements CustomerService {
         return pb;
     }
 
-    //保存客户
+    //保存或修改客户
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ ,propagation = Propagation.REQUIRED)
-    public void save(Customer customer) {
+    public void saveOrUpdate(Customer customer) {
         //维护Customer与数据字典对象的关系,Struts2已经帮我们封装了
         //调用Dao保存客户
-        cd.save(customer);
+        cd.saveOrUpdate(customer);
+    }
+
+    //根据ID获得客户对象
+    @Override
+    public Customer getById(Long cust_id) {
+        return cd.getById(cust_id);
     }
 
     public CustomerDao getCd() {
