@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,9 +16,8 @@
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/AddLinkManServlet"
+		action="${pageContext.request.contextPath}/LinkManAction_add"
 		method=post>
-		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -48,7 +48,11 @@
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
 							<tr>
 								<td>所属客户：</td>
-								<td colspan="3"><input type="text" name="cust_id" style="WIDTH: 180px"/></td>
+								<td colspan="3">
+									<input type="hidden" name="customer.cust_id" style="WIDTH: 180px" id="cust_id"/>
+									<input type="text" style="WIDTH: 180px" id="cust_name"/>
+								<input type="button" value="选择客户" onclick="window.open('${pageContext.request.contextPath}/CustomerAction_list?select=true','','height=240,innerHeight=240,width=710,innerWidth=710,top='+(window.screen.height-30-240)/2+',left='+(window.screen.width-10-710)/2+',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no')">
+								</td>
 							</tr>
 							<TR>
 								<td>联系人名称：</td>

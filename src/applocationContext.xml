@@ -98,4 +98,18 @@
         <!--注入sessionFactory-->
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <!--下面是LinkManAction的配置-->
+    <bean name="linkManAction" class="top.wanvr.web.action.LinkManAction" scope="prototype">
+        <property name="lms" ref="linkManService"/>
+    </bean>
+    <!--service配置-->
+    <bean name="linkManService" class="top.wanvr.service.impl.LinkManServiceImpl">
+        <property name="lmd" ref="linkManDao"/>
+    </bean>
+    <!--dao-->
+    <bean name="linkManDao" class="top.wanvr.dao.impl.LinkManDaoImpl">
+        <!--注入sessionFactory-->
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

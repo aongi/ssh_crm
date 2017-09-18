@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Aongi
@@ -11,6 +12,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <s:debug></s:debug>
   </body>
 </html>
