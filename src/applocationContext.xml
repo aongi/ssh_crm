@@ -84,4 +84,18 @@
         <!--注入sessionFactory-->
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <!--下面是BaseDictAction的配置-->
+    <bean name="baseDictAction" class="top.wanvr.web.action.BaseDictAction" scope="prototype">
+        <property name="baseDictService" ref="baseDictService"/>
+    </bean>
+    <!--service配置-->
+    <bean name="baseDictService" class="top.wanvr.service.impl.BaseDictServiceImpl">
+        <property name="bdd" ref="baseDictDao"/>
+    </bean>
+    <!--dao-->
+    <bean name="baseDictDao" class="top.wanvr.dao.impl.BaseDictDaoImpl">
+        <!--注入sessionFactory-->
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

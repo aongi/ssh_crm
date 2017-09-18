@@ -1,6 +1,9 @@
 package top.wanvr.service.impl;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import top.wanvr.dao.CustomerDao;
 import top.wanvr.entity.Customer;
 import top.wanvr.service.CustomerService;
@@ -26,6 +29,15 @@ public class CustomerServiceImpl implements CustomerService {
         //列表数据放入PageBean中，并返回
         pb.setList(list);
         return pb;
+    }
+
+    //保存客户
+    @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ ,propagation = Propagation.REQUIRED)
+    public void save(Customer customer) {
+        //维护Customer与数据字典对象的关系,Struts2已经帮我们封装了
+        //调用Dao保存客户
+        cd.save(customer);
     }
 
     public CustomerDao getCd() {

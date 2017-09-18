@@ -15,14 +15,24 @@
                 <exception-mapping exception="java.lang.RuntimeException" result="error"/>
             </global-exception-mappings>
 
-            <!-- class填写Spring中action对象的BeanName 完全由Spring来管理action生命周期包括Action的创建 -->
+            <!-- class填写Spring中action对象的BeanName 完全由Spring来管理action生命周期包括Action的创建
+
+            用户对象Action-->
             <action name="UserAction_*" class="userAction" method="{1}">
                 <result name="toHome" type="redirect">/index.htm</result>
                 <result name="error">/login.jsp</result>
             </action>
 
+            <!--客户列表Action-->
             <action name="CustomerAction_*" class="customerAction" method="{1}">
                 <result name="list">/jsp/customer/list.jsp</result>
+                <result name="toList" type="redirectAction">
+                    <param name="namespace">/</param>
+                    <param name="actionName">CustomerAction_list</param>
+                </result>
+            </action>
+            <!--数据字典Action-->
+            <action name="BaseDictAction_*" class="baseDictAction" method="execute">
             </action>
         </package>
 </struts>
